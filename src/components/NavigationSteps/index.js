@@ -17,7 +17,11 @@ const NavItem = styled("div")(props => ({
   margin: "0 10px 0 10px",
   border: "1px solid #00b6b2",
   borderRadius: "10%",
-  background: props.currentPage === props.step ? "#00b6b2" : "white"
+  background: props.currentPage === props.step ? "#00b6b2" : "white",
+  boxShadow:
+    props.currentPage === props.step
+      ? "6px 10px 14px -4px rgba(0,0,0,0.75)"
+      : "none"
 }));
 
 const STEPS = 4;

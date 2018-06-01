@@ -43,12 +43,21 @@ const Footer = props => {
     <DataContext.Consumer>
       {context => {
         const completed = stepCompleted(
-          props.currentPage,
+          props.currentPage.page,
           context.state.stepOptions
         );
         return (
           <Container>
-            <NextButton completed={completed}>NEXT</NextButton>
+            <NextButton
+              completed={completed}
+              onClick={
+                completed
+                  ? () => props.navigateToNextPage(props.currentPage)
+                  : null
+              }
+            >
+              NEXT
+            </NextButton>
           </Container>
         );
       }}

@@ -44,7 +44,9 @@ const defaultStepOptions = () => ({
     selectedPartyCount: 1
   },
   step2: {
-    selectedRestaurant: null,
+    selectedRestaurant: null
+  },
+  step3: {
     selectedMeal: null
   }
 });

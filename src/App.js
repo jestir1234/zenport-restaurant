@@ -4,6 +4,7 @@ import NavigationSteps from "./components/NavigationSteps";
 import FirstStep from "./components/FirstStep";
 import Footer from "./components/Footer";
 import StepContainer from "./components/StepContainer";
+import DataProvider from "./context/DataProvider";
 
 const Header = styled("div")`
   background: #57dee1;
@@ -22,16 +23,18 @@ class App extends Component {
   }
   render() {
     return (
-      <Container>
-        <Header>
-          <h1>ZENPORT MENUS</h1>
-        </Header>
-        <NavigationSteps />
-        <StepContainer
-          render={() => React.createElement(this.state.currentPage)}
-        />
-        <Footer />
-      </Container>
+      <DataProvider>
+        <Container>
+          <Header>
+            <h1>ZENPORT MENUS</h1>
+          </Header>
+          <NavigationSteps />
+          <StepContainer
+            render={() => React.createElement(this.state.currentPage)}
+          />
+          <Footer />
+        </Container>
+      </DataProvider>
     );
   }
 }

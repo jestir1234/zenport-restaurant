@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "react-emotion";
+import styled, { css, keyframes } from "react-emotion";
 
 const Container = styled("div")(props => ({
   display: "flex",

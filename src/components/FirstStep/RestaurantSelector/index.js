@@ -8,7 +8,7 @@ const RestaurantSelector = props => {
       <h3>Please Select a Restaurant</h3>
       <Select
         name="form-field-name"
-        value={props.selectedOption}
+        value={props.selectedRestaurant}
         onChange={props.handleChange}
         options={props.restaurants.map(name => {
           return {

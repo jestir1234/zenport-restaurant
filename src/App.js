@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled, { css } from "react-emotion";
 import NavigationSteps from "./components/NavigationSteps";
+import SecondStep from "./components/SecondStep";
 import FirstStep from "./components/FirstStep";
 import Footer from "./components/Footer";
 import StepContainer from "./components/StepContainer";
@@ -13,13 +14,18 @@ const Header = styled("div")`
 `;
 
 const Container = styled("div")`
-  height: 100%;
+  height: 100vh;
 `;
+
+const pageMap = {
+  step1: FirstStep,
+  step2: SecondStep
+};
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { currentPage: FirstStep };
+    this.state = { currentPage: "step1" };
   }
   render() {
     return (
@@ -28,11 +34,11 @@ class App extends Component {
           <Header>
             <h1>ZENPORT MENUS</h1>
           </Header>
-          <NavigationSteps />
+          <NavigationSteps currentPage={this.state.currentPage} />
           <StepContainer
-            render={() => React.createElement(this.state.currentPage)}
+            render={() => React.createElement(pageMap[this.state.currentPage])}
           />
-          <Footer />
+          <Footer currentPage={this.state.currentPage} />
         </Container>
       </DataProvider>
     );

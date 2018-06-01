@@ -12,25 +12,29 @@ const NavContainer = styled("div")(props => ({
   justifyContent: "center"
 }));
 
-const NavItems = styled("div")(props => ({
+const NavItem = styled("div")(props => ({
   padding: "20px",
   margin: "0 10px 0 10px",
   border: "1px solid #00b6b2",
   borderRadius: "10%",
-  cursor: "pointer",
-  "&:hover": {
-    background: "#b4fffd"
-  }
+  background: props.currentPage === props.step ? "#00b6b2" : "white"
 }));
 
-const NavigationSteps = () => {
+const STEPS = 4;
+
+const NavigationSteps = props => {
   return (
     <Container>
       <NavContainer>
-        <NavItems>Step 1</NavItems>
-        <NavItems>Step 2</NavItems>
-        <NavItems>Step 3</NavItems>
-        <NavItems>Step 4</NavItems>
+        {[...Array(STEPS)].map((step, idx) => (
+          <NavItem
+            currentPage={props.currentPage}
+            key={idx}
+            step={`step${idx + 1}`}
+          >
+            Step {idx + 1}
+          </NavItem>
+        ))}
       </NavContainer>
     </Container>
   );

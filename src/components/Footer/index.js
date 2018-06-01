@@ -1,5 +1,6 @@
 import React from "react";
-import styled, { css } from "react-emotion";
+import styled, { css, keyframes } from "react-emotion";
+import { DataContext } from "../../context/DataProvider";
 
 const Container = styled("div")(props => ({
   width: "100%",
@@ -13,7 +14,7 @@ const Container = styled("div")(props => ({
 const NextButton = styled("div")(props => ({
   width: "150px",
   height: "30px",
-  background: "#57dee1",
+  background: props.completed ? "#57dee1" : "#f0f0f0",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -24,6 +25,7 @@ const NextButton = styled("div")(props => ({
   letterSpacing: "2px",
   marginRight: "20px",
   cursor: "pointer",
+  pointerEvents: props.completed ? "auto" : "none",
   "&:hover": {
     background: "#b4fffd"
   },
@@ -32,11 +34,25 @@ const NextButton = styled("div")(props => ({
   }
 }));
 
+const stepCompleted = (currentPage, stepOptions) => {
+  return !Object.values(stepOptions[currentPage]).includes(null);
+};
+
 const Footer = props => {
   return (
-    <Container>
-      <NextButton>NEXT</NextButton>
-    </Container>
+    <DataContext.Consumer>
+      {context => {
+        const completed = stepCompleted(
+          props.currentPage,
+          context.state.stepOptions
+        );
+        return (
+          <Container>
+            <NextButton completed={completed}>NEXT</NextButton>
+          </Container>
+        );
+      }}
+    </DataContext.Consumer>
   );
 };
 

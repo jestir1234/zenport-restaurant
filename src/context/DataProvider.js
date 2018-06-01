@@ -23,14 +23,61 @@ const parseRestaurants = () => {
   return restaurants;
 };
 
+const parseMealTypes = restaurants => {
+  let mealTypes = {};
+  Object.keys(restaurants).forEach(restaurant => {
+    let restaurantMealTypes = restaurants[restaurant]["availableMeals"];
+    restaurantMealTypes.forEach(type => {
+      if (mealTypes[type]) {
+        mealTypes[type]["restaurants"][restaurant] = restaurants[restaurant];
+      } else {
+        mealTypes[type] = { restaurants: {} };
+      }
+    });
+  });
+  return mealTypes;
+};
+
+const defaultStepOptions = () => ({
+  step1: {
+    selectedMealType: null,
+    selectedPartyCount: 1
+  },
+  step2: {
+    selectedRestaurant: null,
+    selectedMeal: null
+  }
+});
+
 class DataProvider extends Component {
   state = {
-    restaurants: parseRestaurants()
+    restaurants: parseRestaurants(),
+    mealTypes: parseMealTypes(parseRestaurants()),
+    stepOptions: defaultStepOptions()
+  };
+
+  handleChange = (selectedOption, option, currentStep) => {
+    this.setState(prevState => ({
+      ...prevState,
+      stepOptions: {
+        ...prevState.stepOptions,
+        [currentStep]: {
+          ...prevState.stepOptions[currentStep],
+          [option]: selectedOption
+        }
+      }
+    }));
   };
 
   render() {
     return (
-      <DataContext.Provider value={{ state: this.state }}>
+      <DataContext.Provider
+        value={{
+          state: this.state,
+          handleChange: (selectedOption, option, currentStep) =>
+            this.handleChange(selectedOption, option, currentStep)
+        }}
+      >
         {this.props.children}
       </DataContext.Provider>
     );

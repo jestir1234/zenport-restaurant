@@ -1,51 +1,42 @@
 import React from "react";
 import styled, { css } from "react-emotion";
-import RestaurantSelector from "./RestaurantSelector";
-import MealSelector from "./MealSelector";
+import MealTypeSelector from "./MealTypeSelector";
+import PartySelector from "./PartySelector";
 import { DataContext } from "../../context/DataProvider";
 
 class FirstStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedRestaurant: null,
-      selectedMeal: null
+      step: "step1"
     };
   }
-
-  handleChange = (selectedOption, option) => {
-    this.setState({ [option]: selectedOption });
-  };
 
   render() {
     return (
       <DataContext.Consumer>
         {context => {
-          if (this.state.selectedRestaurant) {
-            console.log(
-              context.state.restaurants[this.state.selectedRestaurant.value][
-                "menu"
-              ]
-            );
-          }
           return (
             <div>
-              <RestaurantSelector
-                selectedRestaurant={this.state.selectedRestaurant}
-                handleChange={e => this.handleChange(e, "selectedRestaurant")}
-                restaurants={Object.keys(context.state.restaurants)}
+              <MealTypeSelector
+                mealTypes={Object.keys(context.state.mealTypes)}
+                handleChange={e =>
+                  context.handleChange(e, "selectedMealType", "step1")
+                }
+                selectedMealType={
+                  context.state.stepOptions[this.state.step]["selectedMealType"]
+                }
               />
-              {this.state.selectedRestaurant ? (
-                <MealSelector
-                  selectedMeal={this.state.selectedMeal}
-                  handleChange={e => this.handleChange(e, "selectedMeal")}
-                  menu={
-                    context.state.restaurants[
-                      this.state.selectedRestaurant.value
-                    ]["menu"]
-                  }
-                />
-              ) : null}
+              <PartySelector
+                handleChange={e =>
+                  context.handleChange(e, "selectedPartyCount", "step1")
+                }
+                selectedPartyCount={
+                  context.state.stepOptions[this.state.step][
+                    "selectedPartyCount"
+                  ]
+                }
+              />
             </div>
           );
         }}

@@ -6,7 +6,7 @@ const Container = styled("div")(props => ({
   justifyContent: "center",
   padding: "30px 0 30px",
   border: "1px solid red",
-  height: "400px"
+  height: "50%"
 }));
 
 const StepContainer = props => {

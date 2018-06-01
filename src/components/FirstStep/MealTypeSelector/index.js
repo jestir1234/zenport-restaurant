@@ -3,24 +3,19 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 import styled, { css, keyframes } from "react-emotion";
 
-const fade = keyframes`
-  from { opacity: 0; }
-  50%  { opacity: .5 }
-  to   { opacity: 1 }`;
-
 const Container = styled("div")(props => ({
-  animation: `${fade} 1s ease-in-out`
+  padding: "20px 0 0"
 }));
 
-const MealSelector = props => {
+const MealTypeSelector = props => {
   return (
     <Container>
-      <h3>Please Select a Meal</h3>
+      <h3>Please Select a Meal Type</h3>
       <Select
         name="form-field-name"
-        value={props.selectedMeal}
+        value={props.selectedMealType}
         onChange={props.handleChange}
-        options={props.menu.map(name => {
+        options={props.mealTypes.map(name => {
           return {
             value: name,
             label: name
@@ -31,4 +26,4 @@ const MealSelector = props => {
   );
 };
 
-export default MealSelector;
+export default MealTypeSelector;

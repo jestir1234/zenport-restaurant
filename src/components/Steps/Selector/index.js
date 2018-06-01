@@ -10,12 +10,18 @@ const fade = keyframes`
 
 const Container = styled("div")(props => ({
   animation: `${fade} 1s ease-in-out`,
-  padding: "20px 0 0"
+  padding: "20px 10px 0 10px",
+  ...props.styles
 }));
+
+const Header = styled("h3")(props => ({
+  whiteSpace: "nowrap"
+}));
+
 const Selector = props => {
   return (
-    <Container>
-      <h3>{props.title}</h3>
+    <Container styles={props.styles}>
+      <Header>{props.title}</Header>
       <Select
         name="form-field-name"
         value={props.selectedValue}

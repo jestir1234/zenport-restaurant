@@ -15,14 +15,6 @@ class SecondStep extends React.Component {
     return (
       <DataContext.Consumer>
         {context => {
-          if (this.state.selectedRestaurant) {
-            console.log(
-              context.state.restaurants[this.state.selectedRestaurant.value][
-                "menu"
-              ]
-            );
-          }
-
           let stepOptions = context.state.stepOptions;
           let selectedType =
             context.state.stepOptions.step1.selectedMealType.value;

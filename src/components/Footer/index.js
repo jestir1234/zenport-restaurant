@@ -7,14 +7,11 @@ const Container = styled("div")(props => ({
   height: "100px",
   border: "1px solid blue",
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "space-between",
   alignItems: "center"
 }));
 
-const NextButton = styled("div")(props => ({
-  width: "150px",
-  height: "30px",
-  background: props.completed ? "#57dee1" : "#f0f0f0",
+const buttonClass = css({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -25,13 +22,26 @@ const NextButton = styled("div")(props => ({
   letterSpacing: "2px",
   marginRight: "20px",
   cursor: "pointer",
-  pointerEvents: props.completed ? "auto" : "none",
+  width: "150px",
+  height: "30px",
   "&:hover": {
     background: "#b4fffd"
   },
   "&:active": {
     transform: "scale(.9)"
   }
+});
+
+const NextButton = styled("div")(props => ({
+  marginRight: "20px",
+  background: props.completed ? "#57dee1" : "#f0f0f0",
+  pointerEvents: props.completed ? "auto" : "none"
+}));
+
+const PreviousButton = styled("div")(props => ({
+  marginLeft: "20px",
+  background: props.disableBack ? "#f0f0f0" : "#57dee1",
+  pointerEvents: props.disableBack ? "none" : "auto"
 }));
 
 const stepCompleted = (currentPage, stepOptions) => {
@@ -46,9 +56,23 @@ const Footer = props => {
           props.currentPage.page,
           context.state.stepOptions
         );
+
+        const disableBack = props.currentPage.page === "step1";
         return (
           <Container>
+            <PreviousButton
+              className={buttonClass}
+              disableBack={disableBack}
+              onClick={
+                disableBack
+                  ? null
+                  : () => props.navigateToPreviousPage(props.currentPage)
+              }
+            >
+              Previous
+            </PreviousButton>
             <NextButton
+              className={buttonClass}
               completed={completed}
               onClick={
                 completed

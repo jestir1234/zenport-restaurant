@@ -41,21 +41,22 @@ const parseMealTypes = restaurants => {
 const defaultStepOptions = () => ({
   step1: {
     selectedMealType: null,
-    selectedPartyCount: 1
+    selectedPartyCount: { value: 1, label: 1 }
   },
   step2: {
     selectedRestaurant: null
   },
   step3: {
-    selectedMeal: null
+    selectedMeal: null,
+    selectedServings: { value: 1, label: 1 }
   }
 });
 
 class DataProvider extends Component {
   state = {
-    restaurants: parseRestaurants(),
     mealTypes: parseMealTypes(parseRestaurants()),
-    stepOptions: defaultStepOptions()
+    stepOptions: defaultStepOptions(),
+    currentOrder: {}
   };
 
   handleChange = (selectedOption, option, currentStep) => {
@@ -71,13 +72,20 @@ class DataProvider extends Component {
     }));
   };
 
+  updateOrder = order => {
+    let currentOrder = this.state.currentOrder;
+    let newOrder = Object.assign(currentOrder, order);
+    this.setState({ currentOrder: newOrder });
+  };
+
   render() {
     return (
       <DataContext.Provider
         value={{
           state: this.state,
           handleChange: (selectedOption, option, currentStep) =>
-            this.handleChange(selectedOption, option, currentStep)
+            this.handleChange(selectedOption, option, currentStep),
+          updateOrder: order => this.updateOrder(order)
         }}
       >
         {this.props.children}

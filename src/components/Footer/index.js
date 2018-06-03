@@ -19,7 +19,6 @@ const buttonClass = css({
   textAlign: "center",
   fontWeight: "bold",
   letterSpacing: "2px",
-  marginRight: "20px",
   cursor: "pointer",
   width: "150px",
   height: "30px",
@@ -33,14 +32,14 @@ const buttonClass = css({
 });
 
 const NextButton = styled("div")(props => ({
-  marginRight: "20px",
+  marginRight: "30px",
   background: props.completed ? COLORS.darkAqua : COLORS.grey,
   pointerEvents: props.completed ? "auto" : "none",
   color: props.completed ? COLORS.white : COLORS.dark
 }));
 
 const PreviousButton = styled("div")(props => ({
-  marginLeft: "20px",
+  marginLeft: "30px",
   visibility: props.currentPage.page === "step1" ? "hidden" : "visible",
   background: props.disableBack ? COLORS.grey : COLORS.darkAqua,
   pointerEvents: props.disableBack ? "none" : "auto",

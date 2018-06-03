@@ -52,12 +52,13 @@ class ThirdStep extends React.Component {
             stepOptions[this.state.step]["selectedMeal"];
 
           let mealName;
+          let addedOrder = {};
           if (selectedMealValue) {
             mealName = selectedMealValue.value;
           }
-          const addedOrder = {
-            [mealName]: selectedServingValue.value
-          };
+          if (selectedServingValue) {
+            addedOrder[mealName] = selectedServingValue.value;
+          }
 
           return (
             <Container>

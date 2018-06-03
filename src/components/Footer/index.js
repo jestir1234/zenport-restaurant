@@ -17,7 +17,6 @@ const buttonClass = css({
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
-  border: "1px solid #363c3c",
   fontWeight: "bold",
   letterSpacing: "2px",
   marginRight: "20px",
@@ -40,6 +39,7 @@ const NextButton = styled("div")(props => ({
 
 const PreviousButton = styled("div")(props => ({
   marginLeft: "20px",
+  visibility: props.currentPage.page === "step1" ? "hidden" : "visible",
   background: props.disableBack ? "#f0f0f0" : "#57dee1",
   pointerEvents: props.disableBack ? "none" : "auto"
 }));
@@ -48,7 +48,24 @@ const stepCompleted = (currentPage, stepOptions) => {
   if (currentPage === "step4") {
     return true;
   }
-  return !Object.values(stepOptions[currentPage]).includes(null);
+
+  if (currentPage === "step3") {
+    return Object.keys(stepOptions[currentPage]["currentOrder"]).length > 0;
+  }
+
+  return Object.values(stepOptions[currentPage]).every(hasValue);
+};
+
+const hasValue = currentValue => {
+  if (!currentValue) {
+    return false;
+  }
+
+  if (typeof currentValue === "object") {
+    return Object.keys(currentValue).length > 0;
+  }
+
+  return true;
 };
 
 const Footer = props => {
@@ -66,6 +83,7 @@ const Footer = props => {
             <PreviousButton
               className={buttonClass}
               disableBack={disableBack}
+              currentPage={props.currentPage}
               onClick={
                 disableBack
                   ? null
@@ -83,7 +101,7 @@ const Footer = props => {
                   : null
               }
             >
-              NEXT
+              {props.currentPage.page === "step4" ? "Submit" : "Next"}
             </NextButton>
           </Container>
         );

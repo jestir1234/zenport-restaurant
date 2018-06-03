@@ -23,7 +23,7 @@ const Container = styled("div")(props => ({
 const OrderList = props => {
   return (
     <div>
-      <h3>Orders</h3>
+      <h3>{Object.keys(props.currentOrder).length > 0 && "Orders"}</h3>
       <ListContainer>
         {Object.keys(props.currentOrder).map((dish, idx) => {
           return (

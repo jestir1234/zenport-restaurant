@@ -83,6 +83,7 @@ class ThirdStep extends React.Component {
                 />
 
                 <Selector
+                  errorMessage={stepOptions[this.state.step]["errorMessage"]}
                   styles={SelectorStyles}
                   title={"Please enter no. of servings"}
                   selectedValue={selectedServingValue}

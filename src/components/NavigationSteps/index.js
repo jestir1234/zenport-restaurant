@@ -18,6 +18,8 @@ const NavItem = styled("div")(props => ({
   border: "1px solid #00b6b2",
   borderRadius: "10%",
   background: props.currentPage === props.step ? "#00b6b2" : "white",
+  color: props.currentPage === props.step ? "white" : "black",
+  fontWeight: props.currentPage === props.step ? "bold" : "300",
   boxShadow:
     props.currentPage === props.step
       ? "6px 10px 14px -4px rgba(0,0,0,0.75)"

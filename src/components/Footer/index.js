@@ -50,7 +50,7 @@ const stepCompleted = (currentPage, stepOptions) => {
   }
 
   if (currentPage === "step3") {
-    return Object.keys(stepOptions[currentPage]["currentOrder"]).length > 0;
+    return stepOptions[currentPage]["validMealCount"];
   }
 
   return Object.values(stepOptions[currentPage]).every(hasValue);

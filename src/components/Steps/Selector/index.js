@@ -18,6 +18,11 @@ const Header = styled("h3")(props => ({
   whiteSpace: "nowrap"
 }));
 
+const Error = styled("span")(props => ({
+  color: "red",
+  position: "absolute"
+}));
+
 const Selector = props => {
   return (
     <Container styles={props.styles}>
@@ -28,6 +33,7 @@ const Selector = props => {
         onChange={props.handleChange}
         options={props.options}
       />
+      <Error>{props.errorMessage}</Error>
     </Container>
   );
 };

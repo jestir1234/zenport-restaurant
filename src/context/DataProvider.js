@@ -49,7 +49,9 @@ const defaultStepOptions = () => ({
   step3: {
     selectedMeal: null,
     selectedServings: { value: 1, label: 1 },
-    currentOrder: {}
+    currentOrder: {},
+    validMealCount: false,
+    errorMessage: ""
   }
 });
 
@@ -74,28 +76,69 @@ class DataProvider extends Component {
 
   addOrder = order => {
     let newOrder = { ...this.state.stepOptions.step3.currentOrder, ...order };
-    this.setState(prevState => ({
-      ...prevState,
-      stepOptions: {
-        ...prevState.stepOptions,
-        step3: {
-          ...prevState.stepOptions.step3,
-          currentOrder: newOrder
+    this.setState(
+      prevState => ({
+        ...prevState,
+        stepOptions: {
+          ...prevState.stepOptions,
+          step3: {
+            ...prevState.stepOptions.step3,
+            currentOrder: newOrder
+          }
         }
-      }
-    }));
+      }),
+      this.validateMealCount
+    );
   };
 
   subtractOrder = dish => {
     let currentOrder = { ...this.state.stepOptions.step3.currentOrder };
     delete currentOrder[dish];
+    this.setState(
+      prevState => ({
+        ...prevState,
+        stepOptions: {
+          ...prevState.stepOptions,
+          step3: {
+            ...prevState.stepOptions.step3,
+            currentOrder
+          }
+        }
+      }),
+      this.validateMealCount
+    );
+  };
+
+  validateMealCount = () => {
+    let currentOrders = this.state.stepOptions.step3.currentOrder;
+    let totalMeals =
+      Object.keys(currentOrders).length > 0
+        ? Object.values(this.state.stepOptions.step3.currentOrder).reduce(
+            (acc, val) => acc + val
+          )
+        : 0;
+
+    let selectedPartyCount = this.state.stepOptions.step1.selectedPartyCount
+      .value;
+    let errorMessage = "";
+
+    if (totalMeals > 10) {
+      errorMessage = "Exceeded max total servings of 10.";
+    }
+
+    if (totalMeals < selectedPartyCount) {
+      errorMessage =
+        "Total servings must be equal to or greater than the no. of people in your group.";
+    }
+
     this.setState(prevState => ({
       ...prevState,
       stepOptions: {
         ...prevState.stepOptions,
         step3: {
           ...prevState.stepOptions.step3,
-          currentOrder
+          validMealCount: totalMeals <= 10 && totalMeals >= selectedPartyCount,
+          errorMessage
         }
       }
     }));

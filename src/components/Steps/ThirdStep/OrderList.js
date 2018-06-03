@@ -28,7 +28,7 @@ const OrderList = props => {
         {Object.keys(props.currentOrder).map((dish, idx) => {
           return (
             <ListItem key={idx}>
-              {dish} {props.currentOrder[dish]}
+              {dish} &mdash; {props.currentOrder[dish]}
             </ListItem>
           );
         })}

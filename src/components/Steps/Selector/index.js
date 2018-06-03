@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
-import styled, { css, keyframes } from "react-emotion";
+import styled, { keyframes } from "react-emotion";
+import { MEDIA_BREAKPOINTS, COLORS } from "../../../constants";
 
 const fade = keyframes`
   from { opacity: 0; }
@@ -15,12 +16,16 @@ const Container = styled("div")(props => ({
 }));
 
 const Header = styled("h3")(props => ({
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
+  [MEDIA_BREAKPOINTS.down("xs")]: {
+    whiteSpace: "normal"
+  }
 }));
 
 const Error = styled("span")(props => ({
-  color: "red",
-  position: "absolute"
+  color: COLORS.red,
+  position: "absolute",
+  maxWidth: "300px"
 }));
 
 const Selector = props => {

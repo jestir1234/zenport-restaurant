@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "react-emotion";
+import styled from "react-emotion";
 
 const ListContainer = styled("div")(props => ({
   display: "flex",
@@ -12,12 +12,6 @@ const ListItem = styled("div")(props => ({
   display: "flex",
   justifyContent: "space-evenly",
   marginTop: "5px"
-}));
-
-const Container = styled("div")(props => ({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%"
 }));
 
 const OrderList = props => {

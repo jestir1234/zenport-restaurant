@@ -1,5 +1,4 @@
 import React from "react";
-import styled, { css } from "react-emotion";
 import { DataContext } from "../../../context/DataProvider";
 import Selector from "../Selector";
 

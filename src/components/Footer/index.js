@@ -1,11 +1,11 @@
 import React from "react";
-import styled, { css, keyframes } from "react-emotion";
+import styled, { css } from "react-emotion";
 import { DataContext } from "../../context/DataProvider";
+import { COLORS } from "../../constants";
 
 const Container = styled("div")(props => ({
   width: "100%",
   height: "100px",
-  border: "1px solid blue",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
@@ -24,7 +24,8 @@ const buttonClass = css({
   width: "150px",
   height: "30px",
   "&:hover": {
-    background: "#b4fffd"
+    background: COLORS.lightAqua,
+    color: COLORS.dark
   },
   "&:active": {
     transform: "scale(.9)"
@@ -33,15 +34,17 @@ const buttonClass = css({
 
 const NextButton = styled("div")(props => ({
   marginRight: "20px",
-  background: props.completed ? "#57dee1" : "#f0f0f0",
-  pointerEvents: props.completed ? "auto" : "none"
+  background: props.completed ? COLORS.darkAqua : COLORS.grey,
+  pointerEvents: props.completed ? "auto" : "none",
+  color: props.completed ? COLORS.white : COLORS.dark
 }));
 
 const PreviousButton = styled("div")(props => ({
   marginLeft: "20px",
   visibility: props.currentPage.page === "step1" ? "hidden" : "visible",
-  background: props.disableBack ? "#f0f0f0" : "#57dee1",
-  pointerEvents: props.disableBack ? "none" : "auto"
+  background: props.disableBack ? COLORS.grey : COLORS.darkAqua,
+  pointerEvents: props.disableBack ? "none" : "auto",
+  color: props.disableBack ? COLORS.dark : COLORS.white
 }));
 
 const stepCompleted = (currentPage, stepOptions) => {
@@ -78,6 +81,10 @@ const Footer = props => {
         );
 
         const disableBack = props.currentPage.page === "step1";
+        const nextAction =
+          props.currentPage.page === "step4"
+            ? () => context.logFinalOrder()
+            : () => props.navigateToNextPage(props.currentPage);
         return (
           <Container>
             <PreviousButton
@@ -95,11 +102,7 @@ const Footer = props => {
             <NextButton
               className={buttonClass}
               completed={completed}
-              onClick={
-                completed
-                  ? () => props.navigateToNextPage(props.currentPage)
-                  : null
-              }
+              onClick={completed ? nextAction : null}
             >
               {props.currentPage.page === "step4" ? "Submit" : "Next"}
             </NextButton>

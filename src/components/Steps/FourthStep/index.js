@@ -1,23 +1,33 @@
 import React from "react";
 import styled, { css } from "react-emotion";
 import { DataContext } from "../../../context/DataProvider";
-import Selector from "../Selector";
 import OrderList from "../ThirdStep/OrderList";
+import { MEDIA_BREAKPOINTS, COLORS } from "../../../constants";
 
 const Container = styled("div")(props => ({
   display: "flex",
   flexDirection: "column",
   textAlign: "center",
-  width: "40%",
+  width: "500px",
   padding: "20px",
-  border: "1px solid black"
+  border: `1px solid ${COLORS.dark}`
 }));
 
 const Row = styled("div")(props => ({
   display: "flex",
   justifyContent: "space-between",
-  padding: "10px 40px 10px 40px"
+  padding: "10px 40px 10px 40px",
+  [MEDIA_BREAKPOINTS.down("md")]: {
+    padding: "10px 20px 10px 20px"
+  }
 }));
+
+const headerStyle = css({
+  [MEDIA_BREAKPOINTS.down("md")]: {
+    fontSize: "16px",
+    fontWeight: "bold"
+  }
+});
 
 const orderStyle = css({
   alignSelf: "center"
@@ -37,10 +47,10 @@ class FourthStep extends React.Component {
         {({ state }) => {
           return (
             <Container>
-              <h2>Please Review Your Order</h2>
+              <h2 className={headerStyle}>Please Review Your Order</h2>
               <Row>
                 <span>Meal Type</span>
-                <span>Lunch</span>
+                <span>{state.stepOptions.step1.selectedMealType.value}</span>
               </Row>
               <Row>
                 <span>No. of People</span>

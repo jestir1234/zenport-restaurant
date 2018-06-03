@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { css } from "react-emotion";
+import styled from "react-emotion";
 import NavigationSteps from "./components/NavigationSteps";
 import FirstStep from "./components/Steps/FirstStep";
 import SecondStep from "./components/Steps/SecondStep";
@@ -8,15 +8,20 @@ import FourthStep from "./components/Steps/FourthStep";
 import Footer from "./components/Footer";
 import StepContainer from "./components/StepContainer";
 import DataProvider from "./context/DataProvider";
+import { COLORS } from "./constants";
 
 const Header = styled("div")`
-  background: #57dee1;
+  background: ${COLORS.aqua};
   display: flex;
   justify-content: center;
 `;
 
 const Container = styled("div")`
   height: 100vh;
+  color: ${COLORS.dark};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const pageMap = {
@@ -27,7 +32,7 @@ const pageMap = {
 };
 
 const incrementPage = page => {
-  let nextNum = parseInt(page.slice(4)) + 1;
+  let nextNum = parseInt(page.slice(4), 10) + 1;
   if (nextNum > 4) {
     return page;
   }
@@ -35,7 +40,7 @@ const incrementPage = page => {
 };
 
 const decrementPage = page => {
-  let nextNum = parseInt(page.slice(4)) - 1;
+  let nextNum = parseInt(page.slice(4), 10) - 1;
   if (nextNum < 1) {
     return page;
   }

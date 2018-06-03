@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "react-emotion";
+import styled from "react-emotion";
 import { DataContext } from "../../../context/DataProvider";
 import Selector from "../Selector";
 import CartButtons from "./CartButtons";
@@ -9,8 +9,7 @@ import OrderList from "./OrderList";
 const Container = styled("div")(props => ({
   display: "flex",
   flexDirection: "column",
-  alignItems: "flex-start",
-  width: "50%"
+  alignItems: "flex-start"
 }));
 
 const SelectorContainer = styled("div")(props => ({

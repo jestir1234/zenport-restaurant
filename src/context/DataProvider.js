@@ -144,6 +144,15 @@ class DataProvider extends Component {
     }));
   };
 
+  logFinalOrder = () => {
+    console.log({
+      mealType: this.state.stepOptions.step1.selectedMealType,
+      partyCount: this.state.stepOptions.step1.selectedPartyCount.value,
+      restaurant: this.state.stepOptions.step2.selectedRestaurant.value,
+      order: this.state.stepOptions.step3.currentOrder
+    });
+  };
+
   render() {
     return (
       <DataContext.Provider
@@ -152,7 +161,8 @@ class DataProvider extends Component {
           handleChange: (selectedOption, option, currentStep) =>
             this.handleChange(selectedOption, option, currentStep),
           addOrder: order => this.addOrder(order),
-          subtractOrder: dish => this.subtractOrder(dish)
+          subtractOrder: dish => this.subtractOrder(dish),
+          logFinalOrder: () => this.logFinalOrder()
         }}
       >
         {this.props.children}

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "react-emotion";
 import { MEDIA_BREAKPOINTS, COLORS } from "../../constants";
 
@@ -36,6 +37,10 @@ const NavItem = styled("div")(props => ({
       : "none"
 }));
 
+NavItem.propTypes = {
+  currentPage: PropTypes.string
+};
+
 const STEPS = 4;
 
 const NavigationSteps = props => {
@@ -54,6 +59,10 @@ const NavigationSteps = props => {
       </NavContainer>
     </Container>
   );
+};
+
+NavigationSteps.propTypes = {
+  currentPage: PropTypes.string
 };
 
 export default NavigationSteps;

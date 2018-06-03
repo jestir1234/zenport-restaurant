@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { css } from "react-emotion";
 import { DataContext } from "../../context/DataProvider";
 import { COLORS } from "../../constants";
@@ -38,6 +39,10 @@ const NextButton = styled("div")(props => ({
   color: props.completed ? COLORS.white : COLORS.dark
 }));
 
+NextButton.propTypes = {
+  completed: PropTypes.bool
+};
+
 const PreviousButton = styled("div")(props => ({
   marginLeft: "30px",
   visibility: props.currentPage.page === "step1" ? "hidden" : "visible",
@@ -45,6 +50,10 @@ const PreviousButton = styled("div")(props => ({
   pointerEvents: props.disableBack ? "none" : "auto",
   color: props.disableBack ? COLORS.dark : COLORS.white
 }));
+
+PreviousButton.propTypes = {
+  disableBack: PropTypes.bool
+};
 
 const stepCompleted = (currentPage, stepOptions) => {
   if (currentPage === "step4") {
@@ -110,6 +119,12 @@ const Footer = props => {
       }}
     </DataContext.Consumer>
   );
+};
+
+Footer.propTypes = {
+  currentPage: PropTypes.object,
+  navigateToNextPage: PropTypes.func,
+  navigateToPreviousPage: PropTypes.func
 };
 
 export default Footer;

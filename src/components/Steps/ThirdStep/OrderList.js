@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "react-emotion";
 
 const ListContainer = styled("div")(props => ({
@@ -29,6 +30,10 @@ const OrderList = props => {
       </ListContainer>
     </div>
   );
+};
+
+OrderList.propTypes = {
+  currentOrder: PropTypes.object
 };
 
 export default OrderList;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { keyframes } from "react-emotion";
 
 const fade = keyframes`
@@ -37,6 +38,12 @@ const CartButtons = props => {
       <Icon onClick={props.subtractOrder}>&mdash;</Icon>
     </Container>
   );
+};
+
+CartButtons.propTypes = {
+  selectedValue: PropTypes.object,
+  addOrder: PropTypes.func,
+  subtractOrder: PropTypes.func
 };
 
 export default CartButtons;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import styled, { keyframes } from "react-emotion";
@@ -41,6 +42,14 @@ const Selector = props => {
       <Error>{props.errorMessage}</Error>
     </Container>
   );
+};
+
+Selector.propTypes = {
+  styles: PropTypes.object,
+  title: PropTypes.string,
+  value: PropTypes.string,
+  handleChange: PropTypes.func,
+  options: PropTypes.array
 };
 
 export default Selector;

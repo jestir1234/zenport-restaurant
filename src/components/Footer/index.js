@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "react-emotion";
 import { DataContext } from "../../context/DataProvider";
-import { COLORS } from "../../constants";
+import { COLORS, MEDIA_BREAKPOINTS } from "../../constants";
 
 const Container = styled("div")(props => ({
   width: "100%",
@@ -22,6 +22,9 @@ const buttonClass = css({
   letterSpacing: "2px",
   cursor: "pointer",
   width: "150px",
+  [MEDIA_BREAKPOINTS.down("xs")]: {
+    width: "120px"
+  },
   height: "30px",
   "&:hover": {
     background: COLORS.lightAqua,
@@ -36,7 +39,10 @@ const NextButton = styled("div")(props => ({
   marginRight: "30px",
   background: props.completed ? COLORS.darkAqua : COLORS.grey,
   pointerEvents: props.completed ? "auto" : "none",
-  color: props.completed ? COLORS.white : COLORS.dark
+  color: props.completed ? COLORS.white : COLORS.dark,
+  [MEDIA_BREAKPOINTS.down("xs")]: {
+    marginRight: "20px"
+  }
 }));
 
 NextButton.propTypes = {
@@ -48,7 +54,10 @@ const PreviousButton = styled("div")(props => ({
   visibility: props.currentPage.page === "step1" ? "hidden" : "visible",
   background: props.disableBack ? COLORS.grey : COLORS.darkAqua,
   pointerEvents: props.disableBack ? "none" : "auto",
-  color: props.disableBack ? COLORS.dark : COLORS.white
+  color: props.disableBack ? COLORS.dark : COLORS.white,
+  [MEDIA_BREAKPOINTS.down("xs")]: {
+    marginLeft: "20px"
+  }
 }));
 
 PreviousButton.propTypes = {

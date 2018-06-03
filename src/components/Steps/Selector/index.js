@@ -19,7 +19,8 @@ const Container = styled("div")(props => ({
 const Header = styled("h3")(props => ({
   whiteSpace: "nowrap",
   [MEDIA_BREAKPOINTS.down("xs")]: {
-    whiteSpace: "normal"
+    whiteSpace: "normal",
+    fontSize: "13px"
   }
 }));
 

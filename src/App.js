@@ -39,7 +39,6 @@ const decrementPage = page => {
   if (nextNum < 1) {
     return page;
   }
-  console.log(page.slice(0, 4) + nextNum);
   return page.slice(0, 4) + nextNum;
 };
 

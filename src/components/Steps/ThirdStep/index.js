@@ -5,6 +5,7 @@ import Selector from "../Selector";
 import CartButtons from "./CartButtons";
 import OrderList from "./OrderList";
 
+// STYLES
 const Container = styled("div")(props => ({
   display: "flex",
   flexDirection: "column",
@@ -22,7 +23,11 @@ const SelectorStyles = {
   flex: 1
 };
 
+// CONSTANTS
 const SERVING_MAX = 10;
+
+// HELPER FUNCTIONS
+const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 class ThirdStep extends React.Component {
   constructor(props) {
@@ -50,9 +55,10 @@ class ThirdStep extends React.Component {
           if (selectedMealValue) {
             mealName = selectedMealValue.value;
           }
-          const order = {
+          const addedOrder = {
             [mealName]: selectedServingValue.value
           };
+
           return (
             <Container>
               <SelectorContainer>
@@ -65,12 +71,14 @@ class ThirdStep extends React.Component {
                   }
                   options={restaurants[
                     stepOptions.step2["selectedRestaurant"]["value"]
-                  ]["menu"].map(name => {
-                    return {
-                      value: name,
-                      label: name
-                    };
-                  })}
+                  ]["menu"]
+                    .filter(onlyUnique)
+                    .map(name => {
+                      return {
+                        value: name,
+                        label: name
+                      };
+                    })}
                 />
 
                 <Selector
@@ -89,11 +97,16 @@ class ThirdStep extends React.Component {
                 />
               </SelectorContainer>
               <CartButtons
-                updateOrder={() => context.updateOrder(order)}
+                addOrder={() => context.addOrder(addedOrder)}
+                subtractOrder={() => context.subtractOrder(mealName)}
                 selectedValue={selectedServingValue && selectedMealValue}
               />
 
-              <OrderList currentOrder={context.state.currentOrder} />
+              <OrderList
+                currentOrder={
+                  context.state.stepOptions[this.state.step]["currentOrder"]
+                }
+              />
             </Container>
           );
         }}

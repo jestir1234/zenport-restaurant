@@ -45,6 +45,9 @@ const PreviousButton = styled("div")(props => ({
 }));
 
 const stepCompleted = (currentPage, stepOptions) => {
+  if (currentPage === "step4") {
+    return true;
+  }
   return !Object.values(stepOptions[currentPage]).includes(null);
 };
 

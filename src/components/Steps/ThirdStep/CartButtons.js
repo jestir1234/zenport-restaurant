@@ -33,8 +33,8 @@ const Container = styled("div")(props => ({
 const CartButtons = props => {
   return (
     <Container selectedValue={props.selectedValue}>
-      <Icon onClick={props.updateOrder}>+</Icon>
-      <Icon>&mdash;</Icon>
+      <Icon onClick={props.addOrder}>+</Icon>
+      <Icon onClick={props.subtractOrder}>&mdash;</Icon>
     </Container>
   );
 };

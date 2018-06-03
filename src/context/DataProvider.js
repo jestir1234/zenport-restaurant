@@ -48,15 +48,15 @@ const defaultStepOptions = () => ({
   },
   step3: {
     selectedMeal: null,
-    selectedServings: { value: 1, label: 1 }
+    selectedServings: { value: 1, label: 1 },
+    currentOrder: {}
   }
 });
 
 class DataProvider extends Component {
   state = {
     mealTypes: parseMealTypes(parseRestaurants()),
-    stepOptions: defaultStepOptions(),
-    currentOrder: {}
+    stepOptions: defaultStepOptions()
   };
 
   handleChange = (selectedOption, option, currentStep) => {
@@ -72,10 +72,33 @@ class DataProvider extends Component {
     }));
   };
 
-  updateOrder = order => {
-    let currentOrder = this.state.currentOrder;
-    let newOrder = Object.assign(currentOrder, order);
-    this.setState({ currentOrder: newOrder });
+  addOrder = order => {
+    let newOrder = { ...this.state.stepOptions.step3.currentOrder, ...order };
+    this.setState(prevState => ({
+      ...prevState,
+      stepOptions: {
+        ...prevState.stepOptions,
+        step3: {
+          ...prevState.stepOptions.step3,
+          currentOrder: newOrder
+        }
+      }
+    }));
+  };
+
+  subtractOrder = dish => {
+    let currentOrder = { ...this.state.stepOptions.step3.currentOrder };
+    delete currentOrder[dish];
+    this.setState(prevState => ({
+      ...prevState,
+      stepOptions: {
+        ...prevState.stepOptions,
+        step3: {
+          ...prevState.stepOptions.step3,
+          currentOrder
+        }
+      }
+    }));
   };
 
   render() {
@@ -85,7 +108,8 @@ class DataProvider extends Component {
           state: this.state,
           handleChange: (selectedOption, option, currentStep) =>
             this.handleChange(selectedOption, option, currentStep),
-          updateOrder: order => this.updateOrder(order)
+          addOrder: order => this.addOrder(order),
+          subtractOrder: dish => this.subtractOrder(dish)
         }}
       >
         {this.props.children}

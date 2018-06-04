@@ -45,20 +45,38 @@ class FourthStep extends React.Component {
     return (
       <DataContext.Consumer>
         {({ state }) => {
+          let selectedMealType = state.stepOptions.step1.selectedMealType;
+          let selectedPartyCount = state.stepOptions.step1.selectedPartyCount;
+          let selectedRestaurant = state.stepOptions.step2.selectedRestaurant;
+
+          if (selectedMealType) {
+            selectedMealType = selectedMealType.value;
+          }
+
+          if (selectedPartyCount) {
+            selectedPartyCount =
+              state.stepOptions.step1.selectedPartyCount.value;
+          }
+
+          if (selectedRestaurant) {
+            selectedRestaurant =
+              state.stepOptions.step2.selectedRestaurant.value;
+          }
+
           return (
             <Container>
               <h2 className={headerStyle}>Please Review Your Order</h2>
               <Row>
                 <span>Meal Type</span>
-                <span>{state.stepOptions.step1.selectedMealType.value}</span>
+                <span>{selectedMealType}</span>
               </Row>
               <Row>
                 <span>No. of People</span>
-                <span>{state.stepOptions.step1.selectedPartyCount.value}</span>
+                <span>{selectedPartyCount}</span>
               </Row>
               <Row>
                 <span>Restaurant</span>
-                <span>{state.stepOptions.step2.selectedRestaurant.value}</span>
+                <span>{selectedRestaurant}</span>
               </Row>
               <Row className={orderStyle}>
                 <OrderList

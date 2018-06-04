@@ -15,11 +15,14 @@ class SecondStep extends React.Component {
       <DataContext.Consumer>
         {context => {
           let stepOptions = context.state.stepOptions;
-          let selectedType =
-            context.state.stepOptions.step1.selectedMealType.value;
-
-          let restaurants =
-            context.state.mealTypes[selectedType]["restaurants"];
+          let selectedOption = context.state.stepOptions.step1.selectedMealType;
+          let selectedType;
+          let restaurants = {};
+          if (selectedOption) {
+            selectedType =
+              context.state.stepOptions.step1.selectedMealType.value;
+            restaurants = context.state.mealTypes[selectedType]["restaurants"];
+          }
 
           return (
             <div>

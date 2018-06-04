@@ -1,22 +1,29 @@
 {
   "name": "zenport-assignment",
   "version": "0.1.0",
+  "homepage": "http://jestir1234.github.io/zenport-restaurant",
   "private": true,
   "dependencies": {
     "emotion": "^9.1.3",
+    "gh-pages": "^1.2.0",
     "prop-types": "^15.6.1",
     "prop-types-extra": "^1.1.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-emotion": "^9.1.3",
     "react-scripts": "1.1.4",
-    "react-select": "^1.2.1"
+    "react-select": "^1.2.1",
+    "react-test-context-provider": "^2.2.0",
+    "react-test-renderer": "^16.4.0",
+    "sinon": "^5.0.10"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

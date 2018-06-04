@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the <Footer /> component 1`] = `
+Array [
+  <div
+    className="css-wxoicl"
+>
+    <div
+        className="css-1ndri0n"
+        onClick={null}
+    >
+        Previous
+    </div>
+    <div
+        className="css-ve15fl"
+        onClick={null}
+    >
+        Next
+    </div>
+</div>,
+  "}",
+]
+`;

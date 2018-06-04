@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the <NavigationSteps /> component 1`] = `
+<div
+  className="css-ddmbx9"
+>
+  <div
+    className="css-1l4w6pd"
+  >
+    <div
+      className="css-1mlsixv"
+      step="step1"
+    >
+      Step 
+      1
+    </div>
+    <div
+      className="css-fexx03"
+      step="step2"
+    >
+      Step 
+      2
+    </div>
+    <div
+      className="css-fexx03"
+      step="step3"
+    >
+      Step 
+      3
+    </div>
+    <div
+      className="css-fexx03"
+      step="step4"
+    >
+      Step 
+      4
+    </div>
+  </div>
+</div>
+`;

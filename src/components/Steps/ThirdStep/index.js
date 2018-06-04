@@ -41,10 +41,25 @@ class ThirdStep extends React.Component {
       <DataContext.Consumer>
         {context => {
           const stepOptions = context.state.stepOptions;
-          const selectedType =
-            context.state.stepOptions.step1.selectedMealType.value;
-          const restaurants =
-            context.state.mealTypes[selectedType]["restaurants"];
+          let selectedType;
+          let restaurants;
+          if (context.state.stepOptions.step1.selectedMealType) {
+            selectedType =
+              context.state.stepOptions.step1.selectedMealType.value;
+            restaurants = context.state.mealTypes[selectedType]["restaurants"];
+          }
+          let selectedRestaurant = stepOptions.step2["selectedRestaurant"];
+          let menus = [];
+          if (selectedRestaurant) {
+            menus =
+              restaurants[stepOptions.step2["selectedRestaurant"]["value"]][
+                "menu"
+              ];
+          }
+
+          if (context.state.mealTypes[selectedType]) {
+            restaurants = context.state.mealTypes[selectedType]["restaurants"];
+          }
           const selectedServingValue =
             stepOptions[this.state.step]["selectedServings"];
           const selectedMealValue =
@@ -69,16 +84,12 @@ class ThirdStep extends React.Component {
                   handleChange={e =>
                     context.handleChange(e, "selectedMeal", this.state.step)
                   }
-                  options={restaurants[
-                    stepOptions.step2["selectedRestaurant"]["value"]
-                  ]["menu"]
-                    .filter(onlyUnique)
-                    .map(name => {
-                      return {
-                        value: name,
-                        label: name
-                      };
-                    })}
+                  options={menus.filter(onlyUnique).map(name => {
+                    return {
+                      value: name,
+                      label: name
+                    };
+                  })}
                 />
 
                 <Selector

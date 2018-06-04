@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the <SecondStep /> component 1`] = `
+<div
+  className="css-gzw96f"
+>
+  <h2
+    className="css-1jmxq0i"
+  >
+    Please Review Your Order
+  </h2>
+  <div
+    className="css-1gzlp2k"
+  >
+    <span>
+      Meal Type
+    </span>
+    <span />
+  </div>
+  <div
+    className="css-1gzlp2k"
+  >
+    <span>
+      No. of People
+    </span>
+    <span>
+      1
+    </span>
+  </div>
+  <div
+    className="css-1gzlp2k"
+  >
+    <span>
+      Restaurant
+    </span>
+    <span />
+  </div>
+  <div
+    className="css-1sraaag"
+  >
+    <div>
+      <h3 />
+      <div
+        className="css-17mvcka"
+      />
+    </div>
+  </div>
+</div>
+`;

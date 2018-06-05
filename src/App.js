@@ -14,6 +14,7 @@ const Header = styled("div")`
   background: ${COLORS.aqua};
   display: flex;
   justify-content: center;
+  min-height: 81px;
 `;
 
 const Container = styled("div")`
